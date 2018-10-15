@@ -11,7 +11,7 @@ for folder in ${modified}; do
     (
 	cd "${folder}"
 	if [[ ! -f "Dockerfile" ]]; then
-	    return 0
+	    exit 0
 	fi
 	echo "Building ${folder} ..."
 	image_name="akvo/akvo-${folder}"
