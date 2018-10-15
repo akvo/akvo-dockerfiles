@@ -24,6 +24,6 @@ for folder in ${modified}; do
 	fi
 	image_name="akvo/akvo-${folder}"
 	echo "Pushing ${image_name} ..."
-	docker push -t "${image_name}:${tag}"
+	docker push "${image_name}:${tag}"
     )
 done

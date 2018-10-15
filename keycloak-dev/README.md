@@ -1,4 +1,4 @@
-## Keycloak
+# Keycloak
 
 The admin password for keycloak is "admin" / "password". There is an
 "akvo" realm, where two tenants (t1 & t2) and they are represesnted by
