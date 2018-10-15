@@ -9,10 +9,10 @@ tag="${prefix}.${tag:0:7}"
 
 for folder in ${modified}; do
     (
-	cd "${folder}"
-	if [[ ! -f "Dockerfile" ]]; then
+	if [[ ! -d "${folder}" ]] || [[ ! -f "${folder}/Dockerfile" ]]; then
 	    exit 0
 	fi
+	cd "${folder}"
 	echo "Building ${folder} ..."
 	image_name="akvo/akvo-${folder}"
 	docker build -t "${image_name}:${tag}" .
