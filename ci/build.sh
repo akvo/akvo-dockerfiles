@@ -13,7 +13,9 @@ for folder in ${modified}; do
 	    exit 0
 	fi
 	cd "${folder}"
-	echo "Building ${folder} ..."
+	echo "Checking and building ${folder} ..."
+	docker run --rm -i hadolint/hadolint < Dockerfile
+	find . -name '*.sh' -exec shellcheck {} \;
 	image_name="akvo/akvo-${folder}"
 	docker build -t "${image_name}:${tag}" .
     )
