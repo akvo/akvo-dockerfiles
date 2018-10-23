@@ -1,0 +1,21 @@
+version: "3"
+services:
+  db:
+    image: akvo/akvo-lumen-db:latest
+    environment:
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+  client:
+    image: postgres:9.6
+    environment:
+      - PGSSLMODE=require
+      - PGSSLKEY=/pg-data/server.key
+      - PGSSLCERT=/pg-data/server.crt
+    entrypoint: /bin/bash
+    volumes:
+      - pg-data:/pg-data
+    depends_on:
+      - db
+volumes:
+  pg-data:
