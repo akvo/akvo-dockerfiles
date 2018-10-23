@@ -3,8 +3,10 @@
 set -o errexit
 set -o nounset
 
-host_uid=$(stat -c '%u' /app)
-host_gid=$(stat -c '%g' /app)
+app_dir="${APP_DIR:=/app}"
+
+host_uid=$(stat -c '%u' "${app_dir}")
+host_gid=$(stat -c '%g' "${app_dir}")
 
 user_home="/home/akvo"
 
