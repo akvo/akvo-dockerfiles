@@ -1,7 +1,6 @@
 FROM akvo/akvo-run-as-user:20181023.473c11f as ras
 
-# cypress/base:8
-FROM cypress/base@sha256:740d461c0da849543a5b67611a426e8807263efe6cb0251e6e5feddc4288e3b0
+FROM cypress/base:8
 
 ENV CYPRESS_CACHE_FOLDER=/app
 
