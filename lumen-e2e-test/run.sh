@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
-echo "running cypress against $LUMEN_URL"
+set -o errexit
+set -o nounset
 
-if [ -z "${CYPRESS_RECORD_KEY}" ]; then
-    npm run cypress:run
+echo "Running Cypress against ${CYPRESS_LUMEN_URL}"
+
+if [[ -z "${CYPRESS_RECORD_KEY:=}" ]]; then
+    npm run cypress:run -- --project /app/e2e-test
 else
-    npm run cypress:run -- --record
+    npm run cypress:run -- --project /app/e2e-test --record
 fi
