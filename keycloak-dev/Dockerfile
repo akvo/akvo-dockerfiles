@@ -1,6 +1,6 @@
 FROM jboss/keycloak:3.4.3.Final
 
-ADD akvo.json /tmp/akvo.json
+COPY akvo.json /tmp/akvo.json
 
 ENV KEYCLOAK_USER=admin
 ENV KEYCLOAK_PASSWORD=admin
