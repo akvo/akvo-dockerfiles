@@ -21,5 +21,5 @@ Available users are:
 - "ruth" t2 admin
 - "harry" t2 user
 - "kaj" keycloak user not on a tenant
-
+- "akvo.flow.user.test@gmail.com" for Akvo Flow
 All passwords are "password".
