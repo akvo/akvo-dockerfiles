@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  db:
+    image: akvo/akvo-postgres-11.2:latest
+    environment:
+      - POSTGRES_PASSWORD=akvo
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+  client:
+    image: postgres:11.2
+    environment:
+      - PGSSLMODE=require
+      - PGSSLKEY=/pg-data/server.key
+      - PGSSLCERT=/pg-data/server.crt
+    entrypoint: /bin/bash
+    volumes:
+      - pg-data:/pg-data
+    depends_on:
+      - db
+volumes:
+  pg-data:
