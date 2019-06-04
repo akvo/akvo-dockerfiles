@@ -1,12 +1,12 @@
 FROM akvo/akvo-run-as-user:20181023.473c11f as ras
 
-FROM cypress/base:8
+FROM cypress/base:10
 
 ENV CYPRESS_CACHE_FOLDER=/app
 
 RUN set -ex; \
     apt-get update && apt-get install -y --no-install-recommends \
-    runit=2.1.2-3 && \
+    runit=2.1.2-9.2 && \
     rm -rf /var/lib/apt/lists/* && \
     useradd --home /home/akvo --create-home --shell /bin/bash akvo && \
     mkdir /app && \
