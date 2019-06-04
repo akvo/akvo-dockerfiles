@@ -13,9 +13,6 @@ fi
 docker login -u="${DOCKERHUB_USERNAME}" -p="${DOCKERHUB_PASSWORD}"
 
 modified=$(git diff-tree --no-commit-id --name-only -r "${TRAVIS_COMMIT}" | cut -d '/' -f1 | sort -u)
-prefix=$(date +%Y%m%d.%H%M%S)
-tag="${TRAVIS_COMMIT:=local}"
-tag="${prefix}.${tag:0:7}"
 
 for folder in ${modified}; do
     (
@@ -24,6 +21,6 @@ for folder in ${modified}; do
 	fi
 	image_name="akvo/akvo-${folder}"
 	echo "Pushing ${image_name} ..."
-	docker push "${image_name}:${tag}"
+	docker push "${image_name}"
     )
 done
