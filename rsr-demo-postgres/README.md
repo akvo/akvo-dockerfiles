@@ -4,3 +4,4 @@ We are not using the official postgres images because the official Helm postgres
 the postgres images do not work out of the box. 
 
 Bitnami's images come without PostGIS or plv8, which may require some additional work in the future.
+
