@@ -4,7 +4,8 @@ USER root
 
 RUN set -ex; apt-get update && \
     apt-get install -y --no-install-recommends --no-install-suggests \
-    jq lzop \
+    jq=1.* \
+    lzop=1.* \
     && rm -rf /var/lib/apt/lists/*
 
 USER 1001
