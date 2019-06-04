@@ -13,7 +13,7 @@ fi
 docker login -u="${DOCKERHUB_USERNAME}" -p="${DOCKERHUB_PASSWORD}"
 
 modified=$(git diff-tree --no-commit-id --name-only -r "${TRAVIS_COMMIT}" | cut -d '/' -f1 | sort -u)
-prefix=$(date +%Y%m%d)
+prefix=$(date +%Y%m%d.%H%M%S)
 tag="${TRAVIS_COMMIT:=local}"
 tag="${prefix}.${tag:0:7}"
 
