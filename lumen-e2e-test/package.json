@@ -1,7 +1,7 @@
 {
   "name": "e2e-test",
   "version": "1.0.0",
-  "description": "",
+  "description": "End to end test using Cypress",
   "main": "test.js",
   "dependencies": {},
   "devDependencies": {
