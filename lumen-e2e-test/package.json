@@ -1,7 +1,7 @@
 {
   "name": "e2e-test",
   "version": "1.0.0",
-  "description": "End to end test using Cypress",
+  "description": "End to end test using Cypress.js",
   "main": "test.js",
   "dependencies": {
     "lodash": "^4.17.11"
