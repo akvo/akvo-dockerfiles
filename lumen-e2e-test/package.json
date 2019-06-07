@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "test.js",
-  "dependencies": {},
+  "dependencies": {
+    "lodash": "^4.17.11"
+  },
   "devDependencies": {
     "cypress": "^3.3.1"
   },
