@@ -1,6 +1,6 @@
 FROM akvo/akvo-run-as-user:20181023.473c11f as ras
 
-FROM clojure:lein-2.8.1
+FROM clojure:lein-2.9.1
 
 COPY --from=ras /usr/local/bin/run-as-user.sh /usr/local/bin/run-as-user.sh
 
