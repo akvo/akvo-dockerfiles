@@ -9,4 +9,4 @@ before_install:
   - docker pull hadolint/hadolint
 
 script:
-  - ./ci/build.sh && ./ci/deploy.sh
+  - ./ci/build.sh

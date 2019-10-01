@@ -42,6 +42,19 @@ while read -r folder; do
 	find . -name '*.sh' -exec shellcheck {} \;
 	image_name="akvo/akvo-${folder}"
 	docker build -t "${image_name}:${tag}" .
+
+	## deploy
+	if [[ "${TRAVIS_BRANCH}" != "master" ]]; then
+    exit 0
+  fi
+
+  if [[ "${TRAVIS_PULL_REQUEST}" != "false" ]]; then
+        exit 0
+  fi
+
+  docker login -u="${DOCKERHUB_USERNAME}" -p="${DOCKERHUB_PASSWORD}"
+	echo "Pushing ${image_name} ..."
+	docker push "${image_name}"
 	echo "Image name ${image_name}:${tag}"
   )
 done <<< "${DIRS}"
