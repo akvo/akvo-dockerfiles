@@ -428,7 +428,7 @@
     "emailVerified" : true,
     "firstName" : "Jerome",
     "lastName" : "Eginla",
-    "email" : "jerome@t1.lumen.localhost",
+    "email" : "jerome@t1.akvolumen.org",
     "credentials" : [ {
       "type" : "password",
       "hashedSaltedValue" : "uXZw8c36XP3cBSfWiFRzuFBeyDSR4txNfKJPOFj3O8plYuOI014YDElz2Hpb/Bc2oR5yy+lNqm6mwqPQmeY6Rg==",
