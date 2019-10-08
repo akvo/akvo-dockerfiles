@@ -428,7 +428,7 @@
     "emailVerified" : true,
     "firstName" : "Jerome",
     "lastName" : "Eginla",
-    "email" : "jerome@t1.lumen.localhost",
+    "email" : "jerome@t1.akvolumen.org",
     "credentials" : [ {
       "type" : "password",
       "hashedSaltedValue" : "uXZw8c36XP3cBSfWiFRzuFBeyDSR4txNfKJPOFj3O8plYuOI014YDElz2Hpb/Bc2oR5yy+lNqm6mwqPQmeY6Rg==",
@@ -549,7 +549,7 @@
     "emailVerified" : true,
     "firstName" : "Salim",
     "lastName" : "Trygg",
-    "email" : "salim@t1.lumen.localhost",
+    "email" : "salim@t1.akvolumen.org",
     "credentials" : [ {
       "type" : "password",
       "hashedSaltedValue" : "NZDuGhp5SdepSiQf5UlzF0rO3KnZRNZhBfzoHFAPCmhAo1NeLoDhvR84Zw1n0wsghyMES4FoF4/dplYSSJIjyQ==",
