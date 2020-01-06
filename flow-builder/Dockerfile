@@ -1,8 +1,5 @@
 FROM alpine:3.7
 
-RUN set -ex ; \
-    apk add --no-cache git build-base libffi-dev
-
 ARG CLOUD_SDK_VERSION=272.0.0
 ENV LEIN_ROOT=1
 ENV PATH="/google-cloud-sdk/bin:${PATH}"
@@ -12,6 +9,7 @@ ENV BUNDLE_GEMFILE=/app/src/Dashboard/Gemfile
 RUN set -ex ; \
     apk add --no-cache \
     bash~=4.4 \
+    build-base~=0.5 \
     curl~=7 \
     git~=2 \
     nodejs~=8 \
@@ -23,6 +21,7 @@ RUN set -ex ; \
     maven~=3.5 \
     nss~=3.34 \
     libc6-compat~=1.1 \
+    libffi-dev~=3.2 \
     su-exec~=0.2 \
     shadow~=4.5 \
     zip~=3.0 && \
