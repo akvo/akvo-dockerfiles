@@ -6,7 +6,7 @@ set -o nounset
 echo "Running Cypress against ${CYPRESS_LUMEN_URL}"
 
 if [[ -z "${CYPRESS_RECORD_KEY:=}" ]]; then
-    npm run cypress:run -- --project /app/e2e-test
+    cypress run -- --project /app/e2e-test --browser chrome
 else
-    npm run cypress:run -- --project /app/e2e-test --record
+    cypress run -- --project /app/e2e-test --record --browser chrome
 fi
