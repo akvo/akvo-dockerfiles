@@ -1,6 +1,7 @@
 FROM google/cloud-sdk:276.0.0-alpine
 
 ENV LEIN_ROOT=1
+ENV CLOUDSDK_PYTHON_SITEPACKAGES=1
 
 RUN set -ex ; \
     apk add --no-cache \
@@ -9,6 +10,7 @@ RUN set -ex ; \
     npm~=10 \
     openjdk8~=8 \
     openssh-client~=8 \
+    py-openssl~=19 \
     maven~=3 \
     su-exec~=0.2 \
     shadow~=4 \
