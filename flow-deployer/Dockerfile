@@ -12,7 +12,7 @@ RUN set -eux; \
 
 RUN gcloud components install app-engine-java --quiet && \
     rm -rf /google-cloud-sdk/.install/.backup && \
-    rm -rf /google-cloud-sdk/.install/.download \
+    rm -rf /google-cloud-sdk/.install/.download && \
     \
 # Disable annoying citation warning
     mkdir /root/.parallel && \
