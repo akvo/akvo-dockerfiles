@@ -15,8 +15,8 @@ RUN gcloud components install app-engine-java --quiet && \
     rm -rf /google-cloud-sdk/.install/.download \
     \
 # Disable annoying citation warning
-    mkdir -p /home/root/.parallel && \
-    touch /home/akvo/.parallel/will-cite
+    mkdir /root/.parallel && \
+    touch /root/.parallel/will-cite
 
 COPY deploy.sh /usr/loca/bin/deploy.sh
 
