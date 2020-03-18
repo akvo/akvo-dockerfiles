@@ -1,13 +1,13 @@
-FROM google/cloud-sdk:272.0.0
+FROM google/cloud-sdk:272.0.0-alpine
 
 RUN set -eux; \
-    apk --no-cache add \
-    bash~=5.0 \
+    apk add --no-cache \
+    bash~=5 \
     git~=2 \
     jq~=1.6 \
     unzip~=6 \
     openjdk8~=8 \
-    parallel \
+    parallel~=20190522 \
     nss~=3.44
 
 RUN gcloud components install app-engine-java --quiet && \
