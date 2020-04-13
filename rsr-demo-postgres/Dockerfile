@@ -18,4 +18,5 @@ RUN set -ex; \
     google-cloud-sdk=288.* \
     && rm -rf /var/lib/apt/lists/*
 
+RUN adduser postgres -u 1001
 USER 1001
