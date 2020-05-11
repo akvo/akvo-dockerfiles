@@ -1,5 +1,6 @@
 FROM kiwigrid/gcloud-kubectl-helm:2.12.3-234.0.0-88
 
+# hadolint ignore=DL3002
 USER root
 
 RUN set -x \
