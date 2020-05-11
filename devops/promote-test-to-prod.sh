@@ -39,12 +39,6 @@ git log --oneline $PROD_VERSION..$TEST_VERSION | grep -v "Merge pull request" | 
 generate-slack-notification.sh "${PROD_VERSION}" "${TEST_VERSION}" "I am thinking about deploying ${GITHUB_PROJECT} to production. Should I?" "warning" "dont_wrap" "$GITHUB_PROJECT"
 ./notify.slack.sh
 
-read -r -e -p "Are you sure you want to promote to production? [yn] " CONFIRM
-if [ "${CONFIRM}" != "y" ]; then
-  log "Nothing done"
-  exit 1
-fi
-
 TAG_NAME="promote-$(date +"%Y%m%d-%H%M%S")"
 
 echo ""
