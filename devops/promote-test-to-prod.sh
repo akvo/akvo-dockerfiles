@@ -16,7 +16,6 @@ function read_version () {
     log "running: gcloud container clusters get-credentials ${CLUSTER} --zone europe-west1-d --project akvo-lumen"
     if ! gcloud container clusters get-credentials "${CLUSTER}" --zone europe-west1-d --project akvo-lumen; then
         log "Could not change context to ${CLUSTER}. Nothing done."
-        switch_back
         exit 3
     fi
 
