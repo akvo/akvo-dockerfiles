@@ -6,6 +6,10 @@ function log {
    echo "$(date +"%T") - INFO - $*"
 }
 
+DEPLOYMENT_NAME=$1
+DEPLOYMENT_VERSION_LABEL=$2
+GITHUB_PROJECT=$3
+
 function read_version () {
     CLUSTER=$1
     log "Reading ${CLUSTER} version"
@@ -16,7 +20,7 @@ function read_version () {
         exit 3
     fi
 
-    VERSION=$(kubectl get deployments akvo-flow-services -o jsonpath="{@.spec.template.metadata.labels['akvo-flow-services-version']}")
+    VERSION=$(kubectl get deployments "$DEPLOYMENT_NAME" -o jsonpath="{@.spec.template.metadata.labels['${DEPLOYMENT_VERSION_LABEL}']}")
 }
 
 read_version "test"
@@ -27,13 +31,13 @@ PROD_VERSION=$VERSION
 
 log "Deployed test version is $TEST_VERSION"
 log "Deployed prod version is $PROD_VERSION"
-log "See https://github.com/akvo/akvo-flow-services/compare/$PROD_VERSION..$TEST_VERSION"
+log "See https://github.com/akvo/${GITHUB_PROJECT}/compare/$PROD_VERSION..$TEST_VERSION"
 
 log "Commits to be deployed:"
 echo ""
 git log --oneline $PROD_VERSION..$TEST_VERSION | grep -v "Merge pull request" | grep -v "Merge branch"
 
-generate-slack-notification.sh "${PROD_VERSION}" "${TEST_VERSION}" "I am thinking about deploying this flow services to production. Should I?" "warning" "dont_wrap"
+generate-slack-notification.sh "${PROD_VERSION}" "${TEST_VERSION}" "I am thinking about deploying ${GITHUB_PROJECT} to production. Should I?" "warning" "dont_wrap" "$GITHUB_PROJECT"
 ./notify.slack.sh
 
 read -r -e -p "Are you sure you want to promote to production? [yn] " CONFIRM
@@ -52,7 +56,7 @@ else
    PROMOTION_REASON="REGULAR_RELEASE"
 fi
 
-generate-slack-notification.sh "${PROD_VERSION}" "${TEST_VERSION}" "Promoting Flow Service to production cluster" "warning" "wrap_slack"
+generate-slack-notification.sh "${PROD_VERSION}" "${TEST_VERSION}" "Promoting ${GITHUB_PROJECT} to production cluster" "warning" "wrap_slack" "$GITHUB_PROJECT"
 
 log "To deploy, run: "
 echo "----------------------------------------------"
