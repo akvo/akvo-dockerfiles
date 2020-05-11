@@ -5,7 +5,7 @@ FROM kiwigrid/gcloud-kubectl-helm:2.12.3-234.0.0-88
 USER root
 
 RUN set -x \
-    && apk add -u --no-cache curl jq bash \
+    && apk add -u --no-cache curl~=7 jq~=1 bash~=4 \
     && curl -o /usr/bin/slack-cli https://raw.githubusercontent.com/rockymadden/slack-cli/master/src/slack \
     && chmod +x /usr/bin/slack-cli \
     && slack-cli -v
