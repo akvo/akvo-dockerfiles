@@ -39,7 +39,7 @@ git log --oneline --no-merges $PROD_VERSION..$TEST_VERSION
 generate-slack-notification.sh "${PROD_VERSION}" "${TEST_VERSION}" "I am thinking about deploying ${GITHUB_PROJECT} to production. Should I?" "warning" "dont_wrap" "$GITHUB_PROJECT"
 ./notify.slack.sh
 
-TAG_NAME="promote-$(date +"%Y%m%d-%H%M%S")"
+TAG_NAME="promote-$(TZ=UTC date +"%Y%m%d-%H%M%S")"
 
 echo ""
 read -r -e -p "Does this deployment contain a hotfix, rollback or fix-forward for a previous deployment? [yn] " FIX
