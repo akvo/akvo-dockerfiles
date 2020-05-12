@@ -13,6 +13,7 @@ RUN useradd --create-home --home /home/akvo --shell /bin/bash --password akvo ak
 COPY run-as-user.sh /usr/local/bin/run-as-user.sh
 COPY promote-test-to-prod.sh /usr/local/bin/promote-test-to-prod.sh
 COPY helpers/generate-slack-notification.sh /usr/local/bin/generate-slack-notification.sh
+COPY helpers/generate-zulip-notification.sh /usr/local/bin/generate-zulip-notification.sh
 
 WORKDIR /app
 ENTRYPOINT ["/usr/local/bin/run-as-user.sh"]

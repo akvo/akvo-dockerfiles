@@ -7,7 +7,7 @@ COLOR=$4
 WRAP_SLACK=$5
 GITHUB_PROJECT=$6
 
-cat << EOF > notify.slack.sh
+cat << EOF > notify.team.sh
 #!/usr/bin/env bash
 
 if [ -z "\${SLACK_CLI_TOKEN}" ]; then
@@ -33,4 +33,4 @@ fi
     --text "\$slack_txt" > /dev/null
 EOF
 
-chmod u+x notify.slack.sh
+chmod u+x notify.team.sh

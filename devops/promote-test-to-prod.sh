@@ -9,6 +9,7 @@ function log {
 DEPLOYMENT_NAME=$1
 DEPLOYMENT_VERSION_LABEL=$2
 GITHUB_PROJECT=$3
+NOTIFICATION=${4:-slack}
 
 function read_version () {
     CLUSTER=$1
@@ -42,8 +43,8 @@ log "Commits to be deployed:"
 echo ""
 git log --oneline $PROD_VERSION..$TEST_VERSION | grep -v "Merge pull request" | grep -v "Merge branch"
 
-generate-slack-notification.sh "${PROD_VERSION}" "${TEST_VERSION}" "I am thinking about deploying ${GITHUB_PROJECT} to production. Should I?" "warning" "dont_wrap" "$GITHUB_PROJECT"
-./notify.slack.sh
+"generate-${NOTIFICATION}-notification.sh" "${PROD_VERSION}" "${TEST_VERSION}" "I am thinking about deploying ${GITHUB_PROJECT} to production. Should I?" "warning" "dont_wrap" "$GITHUB_PROJECT"
+./notify.team.sh
 
 TAG_NAME="promote-$(TZ=UTC date +"%Y%m%d-%H%M%S")"
 
@@ -55,11 +56,11 @@ else
    PROMOTION_REASON="REGULAR_RELEASE"
 fi
 
-generate-slack-notification.sh "${PROD_VERSION}" "${TEST_VERSION}" "Promoting ${GITHUB_PROJECT} to production cluster" "warning" "wrap_slack" "$GITHUB_PROJECT"
+"generate-${NOTIFICATION}-notification.sh" "${PROD_VERSION}" "${TEST_VERSION}" "Promoting ${GITHUB_PROJECT} to production cluster" "warning" "wrap_slack" "$GITHUB_PROJECT"
 
 log "To deploy, run: "
 echo "----------------------------------------------"
 echo "git tag -a $TAG_NAME $TEST_VERSION -m \"$PROMOTION_REASON\""
 echo "git push origin $TAG_NAME"
-echo "./notify.slack.sh"
+echo "./notify.team.sh"
 echo "----------------------------------------------"
