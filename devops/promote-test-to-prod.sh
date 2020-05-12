@@ -22,6 +22,12 @@ function read_version () {
     VERSION=$(kubectl get deployments "$DEPLOYMENT_NAME" -o jsonpath="{@.spec.template.metadata.labels['${DEPLOYMENT_VERSION_LABEL}']}")
 }
 
+if [[ -z "$(gcloud config list --format='value(core.account)')" ]]; then
+  gcloud auth login
+fi
+
+gcloud config set project akvo-lumen
+
 read_version "test"
 TEST_VERSION=$VERSION
 
