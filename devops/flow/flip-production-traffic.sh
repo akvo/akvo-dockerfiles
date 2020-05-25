@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -ux
+set -u
 
 function log {
    echo "$(date +"%T") - INFO - $*"
