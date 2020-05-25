@@ -15,5 +15,8 @@ COPY promote-test-to-prod.sh /usr/local/bin/promote-test-to-prod.sh
 COPY helpers/generate-slack-notification.sh /usr/local/bin/generate-slack-notification.sh
 COPY helpers/generate-zulip-notification.sh /usr/local/bin/generate-zulip-notification.sh
 
+COPY flow/flip-production-traffic.sh /usr/local/bin/flow-flip-production-traffic.sh
+COPY flow/promote-test-to-prod.sh /usr/local/bin/flow-promote-test-to-prod.sh
+
 WORKDIR /app
 ENTRYPOINT ["/usr/local/bin/run-as-user.sh"]
