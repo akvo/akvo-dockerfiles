@@ -11,7 +11,7 @@ GITHUB_PROJECT=akvo-flow
 function read_version () {
     PROJECT=$1
     log "Reading ${PROJECT} version"
-    VERSION=$(gcloud app versions list --project="${PROJECT}" --hide-no-traffic --service=default --format="value(VERSION.id)")
+    VERSION=$(gcloud app versions list --project="${PROJECT}" --hide-no-traffic --service=default --format="value(VERSION)")
 }
 
 if [[ -z "$(gcloud config list --format='value(core.account)')" ]]; then
