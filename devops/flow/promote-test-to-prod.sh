@@ -7,7 +7,6 @@ function log {
 }
 
 GITHUB_PROJECT=akvo-flow
-NOTIFICATION=${4:-slack}
 
 function read_version () {
     PROJECT=$1
