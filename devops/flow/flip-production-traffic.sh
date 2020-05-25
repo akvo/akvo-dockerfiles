@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -u
+set -ux
 
 function log {
    echo "$(date +"%T") - INFO - $*"
@@ -37,7 +37,7 @@ if [[ -z "$NEW_LIVE_VERSION" ]]; then
   NEW_LIVE_VERSION=$DEFAULT_VERSION_TO_FLIP_TO
 fi
 
-if ! gcloud app versions list --project="$PROD_CLUSTER" --sort-by=~VERSION.createTime --limit=5 --format="value(VERSION.id)" | grep "^${NEW_LIVE_VERSION}"; then
+if ! gcloud app versions list --project="$PROD_CLUSTER" --sort-by=~VERSION.createTime --limit=5 --format="value(VERSION)" | grep "^${NEW_LIVE_VERSION}"; then
   log "Version selected [$NEW_LIVE_VERSION] not deployed in production. Doing nothing."
   exit 1
 fi
