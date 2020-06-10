@@ -39,7 +39,7 @@ while read -r folder; do
 	cd "${folder}"
 	echo "Checking and building ${folder} ..."
 	docker run --rm -i hadolint/hadolint < Dockerfile
-	find . -name '*.sh' -exec shellcheck {} \;
+	find . -name '*.sh' -type f -print0 | xargs -0 -r -n1 shellcheck
 	image_name="akvo/akvo-${folder}"
 	docker build -t "${image_name}:${tag}" .
 

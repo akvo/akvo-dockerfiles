@@ -1,10 +1,8 @@
-
+#!/usr/bin/env bash
 
 OLDER_GIT_VERSION=$1
 NEWEST_GIT_VERSION=$2
 MSG=$3
-COLOR=$4
-WRAP_SLACK=$5
 GITHUB_PROJECT=$6
 
 cat << EOF > notify.team.sh
@@ -25,7 +23,7 @@ curl -X POST https://akvo.zulipchat.com/api/v1/messages \
     -d "type=stream" \
     -d "to=rsr" \
     -d "topic=Releases" \
-    -d $"content=$MSG. [Full diff](https://github.com/akvo/${GITHUB_PROJECT}/compare/$OLDER_GIT_VERSION..$NEWEST_GIT_VERSION).
+    -d "content=$MSG. [Full diff](https://github.com/akvo/${GITHUB_PROJECT}/compare/$OLDER_GIT_VERSION..$NEWEST_GIT_VERSION).
 
 \$slack_txt"
 
