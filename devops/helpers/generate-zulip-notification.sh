@@ -16,7 +16,7 @@ if [ -z "\${ZULIP_CLI_TOKEN}" ]; then
   exit 1
 fi
 
-slack_txt=\$(git log --oneline $OLDER_GIT_VERSION..$NEWEST_GIT_VERSION | grep -v "Merge pull request" | grep -v "Merge branch" | cut -f 2- -d\  | sed 's/\[#\([0-9]*\)\]/#\1/' | tr \" \' | tr \& \ )
+slack_txt=\$(git log --oneline --no-merges $OLDER_GIT_VERSION..$NEWEST_GIT_VERSION | cut -f 2- -d\  | sed 's/\[#\([0-9]*\)\]/#\1/' | tr \" \' | tr \& \ )
 
 curl -X POST https://akvo.zulipchat.com/api/v1/messages \
     -u "\${ZULIP_CLI_TOKEN}" \
