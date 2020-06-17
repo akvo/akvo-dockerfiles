@@ -5,7 +5,7 @@ USER root
 
 RUN set -x \
     && apk add -u --no-cache curl~=7 jq~=1 bash~=4 shadow~=4.5 runit~=2.1 \
-    && curl -o /usr/bin/slack-cli https://github.com/rockymadden/slack-cli/blob/v0.18.0/src/slack \
+    && curl -o /usr/bin/slack-cli https://raw.githubusercontent.com/rockymadden/slack-cli/v0.18.0/src/slack \
     && chmod +x /usr/bin/slack-cli \
     && slack-cli -v
 
