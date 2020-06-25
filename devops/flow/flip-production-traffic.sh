@@ -44,7 +44,7 @@ fi
 
 log "Changes to be deployed: https://github.com/akvo/${GITHUB_PROJECT}/compare/$PROD_LIVE_VERSION..$NEW_LIVE_VERSION"
 log "Commits to be deployed:"
-git log --oneline "$PROD_LIVE_VERSION".."$NEW_LIVE_VERSION" | grep -v "Merge pull request" | grep -v "Merge branch"
+git --no-pager log --oneline --no-merges "$PROD_LIVE_VERSION".."$NEW_LIVE_VERSION"
 
 generate-slack-notification.sh "${PROD_LIVE_VERSION}" "${NEW_LIVE_VERSION}" "I am thinking about flipping **FLOW prod** to make this changes live. Should I?" "warning"
 ./notify.team.sh

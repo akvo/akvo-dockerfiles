@@ -44,7 +44,7 @@ git fetch
 
 log "Commits to be deployed:"
 echo ""
-git log --oneline "${PROD_VERSION}..${TEST_VERSION}" | grep -v "Merge pull request" | grep -v "Merge branch"
+git --no-pager log --oneline --no-merges "${PROD_VERSION}..${TEST_VERSION}"
 
 "generate-${NOTIFICATION}-notification.sh" "${PROD_VERSION}" "${TEST_VERSION}" "I am thinking about deploying ${GITHUB_PROJECT} to production. Should I?" "warning" "dont_wrap" "$GITHUB_PROJECT"
 ./notify.team.sh
