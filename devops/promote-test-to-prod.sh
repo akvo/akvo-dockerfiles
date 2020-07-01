@@ -39,9 +39,6 @@ log "Deployed test version is $TEST_VERSION"
 log "Deployed prod version is $PROD_VERSION"
 log "See https://github.com/akvo/${GITHUB_PROJECT}/compare/$PROD_VERSION..$TEST_VERSION"
 
-log "Fetching latest code from remote"
-git fetch
-
 log "Commits to be deployed:"
 echo ""
 git --no-pager log --oneline --no-merges "${PROD_VERSION}..${TEST_VERSION}"
