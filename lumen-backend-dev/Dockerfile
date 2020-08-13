@@ -1,6 +1,6 @@
-FROM akvo/akvo-run-as-user:20181023.473c11f as runasuser
+FROM akvo/akvo-run-as-user:20200813.123605.7ae822d as runasuser
 
-FROM clojure:openjdk-11-lein-2.9.3
+FROM clojure:openjdk-11-lein-2.9.3-slim-buster
 
 COPY --from=runasuser /usr/local/bin/run-as-user.sh /usr/local/bin/run-as-user.sh
 
