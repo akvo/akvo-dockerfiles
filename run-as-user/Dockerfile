@@ -1,4 +1,4 @@
-FROM debian:buster-slim
+FROM debian:buster
 
 RUN set -ex; \
     apt-get update && \
