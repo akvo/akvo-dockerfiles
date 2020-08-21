@@ -1,7 +1,6 @@
 FROM akvo/akvo-run-as-user:20200813.123605.7ae822d as runasuser
 
-FROM clojure:openjdk-11-lein-2.9.3-slim-buster
-
+FROM clojure:openjdk-11-tools-deps-1.10.1.561-buster
 COPY --from=runasuser /usr/local/bin/run-as-user.sh /usr/local/bin/run-as-user.sh
 
 RUN set -eux; \
@@ -12,8 +11,8 @@ RUN set -eux; \
     postgresql-client-11=11.7-0+deb10u1 \
     runit=2.1.2-25 && \
     useradd --create-home --home /home/akvo --shell /bin/bash --password akvo akvo && \
-    cp -r /root/.lein /home/akvo/.lein && \
-    chown akvo:akvo /home/akvo/.lein -R && \
+    cp -r /root/.clojure /home/akvo/.clojure && \
+    chown akvo:akvo /home/akvo/.clojure -R && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
