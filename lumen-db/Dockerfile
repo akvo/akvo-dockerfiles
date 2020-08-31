@@ -1,4 +1,4 @@
-FROM akvo/akvo-postgres-9.6:20181016.51e1148 as akvo-pg
+FROM pg:local as akvo-pg
 
 FROM mdillon/postgis:9.6 as mdillon
 

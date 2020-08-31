@@ -12,8 +12,8 @@ sed -i \
     "${PGDATA}/postgresql.conf"
 
 # Force SSL
-sed -i \
-    -e "/^host/d" \
-    -e "/^local/d" "${PGDATA}/pg_hba.conf"
+#sed -i \
+#    -e "/^host/d" \
+#    -e "/^local/d" "${PGDATA}/pg_hba.conf"
 
 echo "hostssl  all  all  0.0.0.0/0  md5" >> "${PGDATA}/pg_hba.conf"
