@@ -4,7 +4,7 @@ FROM cypress/included:5.3.0
 
 RUN set -ex; \
     apt-get update && apt-get install -y --no-install-recommends \
-    runit=2.1.2-9.2 && \
+    runit=2.1.2-25 && \
     rm -rf /var/lib/apt/lists/* && \
     useradd --home /home/akvo --create-home --shell /bin/bash akvo && \
     mkdir /app && \
