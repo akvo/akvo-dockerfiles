@@ -1,6 +1,6 @@
 FROM akvo/akvo-run-as-user:20181023.473c11f as ras
 
-FROM cypress/included:3.8.1
+FROM cypress/included:5.3.0
 
 RUN set -ex; \
     apt-get update && apt-get install -y --no-install-recommends \
