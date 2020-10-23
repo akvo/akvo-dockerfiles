@@ -74,7 +74,7 @@ else
    PROMOTION_REASON="REGULAR_RELEASE"
 fi
 
-generate-slack-notification.sh "${NEWEST_VERSION_IN_PROD}" "${TEST_LIVE_VERSION}" "Promoting ${GITHUB_PROJECT} to dark production (aka https://uat1.akvoflow.org)" "good" "wrap_slack" "$GITHUB_PROJECT"
+generate-zulip-notification.sh "${NEWEST_VERSION_IN_PROD}" "${TEST_LIVE_VERSION}" "Promoting ${GITHUB_PROJECT} to dark production (aka https://uat1.akvoflow.org)" "good" "wrap_slack" "$GITHUB_PROJECT" "flumen-dev"
 
 log "To deploy, run: "
 echo "----------------------------------------------"
