@@ -9,7 +9,8 @@ function log {
 DEPLOYMENT_NAME=$1
 DEPLOYMENT_VERSION_LABEL=$2
 GITHUB_PROJECT=$3
-NOTIFICATION=${4:-slack}
+NOTIFICATION=$4
+ZULIP_STREAM=$5
 
 function read_version () {
     CLUSTER=$1
@@ -43,7 +44,7 @@ log "Commits to be deployed:"
 echo ""
 git --no-pager log --oneline --no-merges "${PROD_VERSION}..${TEST_VERSION}"
 
-"generate-${NOTIFICATION}-notification.sh" "${PROD_VERSION}" "${TEST_VERSION}" "I am thinking about deploying ${GITHUB_PROJECT} to production. Should I?" "warning" "dont_wrap" "$GITHUB_PROJECT"
+"generate-${NOTIFICATION}-notification.sh" "${PROD_VERSION}" "${TEST_VERSION}" "I am thinking about deploying ${GITHUB_PROJECT} to production. Should I?" "warning" "dont_wrap" "$GITHUB_PROJECT" "$ZULIP_STREAM"
 ./notify.team.sh
 
 TAG_NAME="promote-$(TZ=UTC date +"%Y%m%d-%H%M%S")"
@@ -56,7 +57,7 @@ else
    PROMOTION_REASON="REGULAR_RELEASE"
 fi
 
-"generate-${NOTIFICATION}-notification.sh" "${PROD_VERSION}" "${TEST_VERSION}" "Promoting ${GITHUB_PROJECT} to production cluster" "warning" "wrap_slack" "$GITHUB_PROJECT"
+"generate-${NOTIFICATION}-notification.sh" "${PROD_VERSION}" "${TEST_VERSION}" "Promoting ${GITHUB_PROJECT} to production cluster" "warning" "wrap_slack" "$GITHUB_PROJECT" "$ZULIP_STREAM"
 
 log "To deploy, run: "
 echo "----------------------------------------------"
