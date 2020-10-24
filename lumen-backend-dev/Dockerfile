@@ -6,6 +6,7 @@ COPY --from=runasuser /usr/local/bin/run-as-user.sh /usr/local/bin/run-as-user.s
 RUN set -eux; \
     apt-get update && \
     apt-get -qq install -y --no-install-recommends --no-install-suggests \
+    curl=7.64.0-4+deb10u1 \
     postgis=2.5.1+dfsg-1 \
     gdal-bin=2.4.0+dfsg-1+b1 \
     postgresql-client-11=11.9-0+deb10u1 \
