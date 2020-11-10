@@ -42,7 +42,7 @@ log "See https://github.com/akvo/${GITHUB_PROJECT}/compare/$PROD_VERSION..$TEST_
 
 log "Commits to be deployed:"
 echo ""
-git --no-pager log --oneline --no-merges "${PROD_VERSION}..${TEST_VERSION}"
+git --no-pager log --reverse --oneline --no-merges "${PROD_VERSION}..${TEST_VERSION}"
 
 "generate-${NOTIFICATION}-notification.sh" "${PROD_VERSION}" "${TEST_VERSION}" "I am thinking about deploying **${GITHUB_PROJECT}** to production. Should I?" "warning" "dont_wrap" "$GITHUB_PROJECT" "$ZULIP_STREAM"
 ./notify.team.sh
