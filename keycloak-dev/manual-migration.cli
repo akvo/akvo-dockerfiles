@@ -1,0 +1,17 @@
+embed-server --std-out=echo
+
+/system-property=keycloak.migration.action:add(value=import)
+/system-property=keycloak.migration.provider:add(value=singleFile)
+/system-property=keycloak.migration.file:add(value=/tmp/akvo.json)
+/system-property=keycloak.migration.strategy:add(value=IGNORE_EXISTING)
+
+reload --admin-only=false
+
+/system-property=keycloak.migration.action:remove
+/system-property=keycloak.migration.provider:remove
+/system-property=keycloak.migration.file:remove
+/system-property=keycloak.migration.strategy:remove
+
+/subsystem=keycloak-server/spi=connectionsJpa/provider=default/:map-put(name=properties,key=migrationStrategy,value=manual)
+
+quit
