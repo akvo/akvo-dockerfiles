@@ -41,8 +41,6 @@ ENV KEYCLOAK_VERSION 3.4.3.Final
 
 EXPOSE 8080
 
-
-
 WORKDIR /opt/jboss/keycloak
 
 ENTRYPOINT ["/opt/jboss/keycloak/bin/standalone.sh"]
