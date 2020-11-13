@@ -21,6 +21,4 @@ COPY --from=build /opt/jboss/keycloak/standalone/data/keycloak.mv.db \
 COPY --from=build /opt/jboss/keycloak/standalone/configuration/standalone.xml \
 	/opt/jboss/keycloak/standalone/configuration/standalone.xml
 
-RUN set -ex; chown jboss:jboss /opt/jboss/keycloak/standalone/ -R
-
 CMD ["-b", "0.0.0.0"]
