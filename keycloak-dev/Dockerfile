@@ -1,11 +1,26 @@
-FROM jboss/keycloak:3.4.3.Final
+# Build
+FROM jboss/keycloak:3.4.3.Final as build
 
 COPY akvo.json /tmp/akvo.json
+COPY manual-migration.cli /tmp/manual-migration.cli
 
-ENV KEYCLOAK_USER=admin
-ENV KEYCLOAK_PASSWORD=admin
+USER jboss
 
-CMD ["-b", "0.0.0.0", "-Dkeycloak.migration.action=import", \
-     "-Dkeycloak.migration.provider=singleFile", \
-     "-Dkeycloak.migration.file=/tmp/akvo.json", \
-     "-Dkeycloak.migration.strategy=IGNORE_EXISTING"]
+WORKDIR /opt/jboss/keycloak
+
+ENV JAVA_OPTS="-server -Xms64m -Xmx512m"
+
+RUN set -ex; \
+    bash ./bin/jboss-cli.sh --file=/tmp/manual-migration.cli
+
+# Runtime
+FROM jboss/keycloak:3.4.3.Final
+
+COPY --from=build /opt/jboss/keycloak/standalone/data/keycloak.mv.db \
+	/opt/jboss/keycloak/standalone/data/keycloak.mv.db
+COPY --from=build /opt/jboss/keycloak/standalone/configuration/standalone.xml \
+	/opt/jboss/keycloak/standalone/configuration/standalone.xml
+
+RUN set -ex; chown jboss:jboss /opt/jboss/keycloak/standalone/ -R
+
+CMD ["-b", "0.0.0.0"]
