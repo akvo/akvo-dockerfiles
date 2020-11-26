@@ -12,8 +12,9 @@ RUN set -ex ; \
     openssh-client~=8 \
     py-openssl~=19 \
     maven~=3 \
-    su-exec~=0.2 \
     shadow~=4 \
+    su-exec~=0.2 \
+    uchardet~=0.0.6-r0 \
     zip~=3 && \
     gcloud components install app-engine-java && \
     rm -rf /google-cloud-sdk/.install/.backup && \
