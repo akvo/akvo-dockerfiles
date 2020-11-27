@@ -14,7 +14,7 @@ RUN set -ex ; \
     maven~=3 \
     shadow~=4 \
     su-exec~=0.2 \
-    uchardet~=0.0.6-r0 \
+    uchardet~=0.0.6 \
     zip~=3 && \
     gcloud components install app-engine-java && \
     rm -rf /google-cloud-sdk/.install/.backup && \
