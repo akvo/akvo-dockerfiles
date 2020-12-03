@@ -17,16 +17,16 @@ if [ -z "\${ZULIP_CLI_TOKEN}" ]; then
   exit 1
 fi
 
-slack_txt=\$(git --no-pager log --oneline --no-merges $OLDER_GIT_VERSION..$NEWEST_GIT_VERSION | cut -f 2- -d\  | sed 's/\[#\([0-9]*\)\]/\[#\1\]\(https:\/\/github.com\/akvo\/${GITHUB_PROJECT}\/issues\/\1\)/' | tr \" \')
+zulip_txt=\$(git --no-pager log --reverse --oneline --no-merges $OLDER_GIT_VERSION..$NEWEST_GIT_VERSION | cut -f 2- -d\  | sed 's/\[#\([0-9]*\)\]/\[#\1\]\(https:\/\/github.com\/akvo\/${GITHUB_PROJECT}\/issues\/\1\)/' | tr \" \')
 
-curl -X POST https://akvo.zulipchat.com/api/v1/messages \
-    -u "\${ZULIP_CLI_TOKEN}" \
-    -d "type=stream" \
-    -d "to=${ZULIP_STREAM}" \
-    -d "topic=Releases" \
-    -d "content=$MSG. [Full diff](https://github.com/akvo/${GITHUB_PROJECT}/compare/$OLDER_GIT_VERSION..$NEWEST_GIT_VERSION).
+curl --request POST https://akvo.zulipchat.com/api/v1/messages \
+    --user "\${ZULIP_CLI_TOKEN}" \
+    --data "type=stream" \
+    --data "to=${ZULIP_STREAM}" \
+    --data "topic=Releases" \
+    --data-urlencode "content=$MSG. [Full diff](https://github.com/akvo/${GITHUB_PROJECT}/compare/$OLDER_GIT_VERSION..$NEWEST_GIT_VERSION).
 
-\$slack_txt"
+\${zulip_txt}"
 
 EOF
 

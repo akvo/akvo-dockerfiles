@@ -17,7 +17,7 @@ if [ -z "\${SLACK_CLI_TOKEN}" ]; then
   exit 1
 fi
 
-slack_txt=\$(git --no-pager log --oneline --no-merges $OLDER_GIT_VERSION..$NEWEST_GIT_VERSION | cut -f 2- -d\  | sed 's/\[#\([0-9]*\)\]/<https:\/\/github.com\/akvo\/${GITHUB_PROJECT}\/issues\/\1|[#\1]>/' | tr \" \')
+slack_txt=\$(git --no-pager log --reverse --oneline --no-merges $OLDER_GIT_VERSION..$NEWEST_GIT_VERSION | cut -f 2- -d\  | sed 's/\[#\([0-9]*\)\]/<https:\/\/github.com\/akvo\/${GITHUB_PROJECT}\/issues\/\1|[#\1]>/' | tr \" \')
 
 if [ $WRAP_SLACK == "wrap_slack" ]; then
   CMD="docker run --rm -e SLACK_CLI_TOKEN 512k/slack-cli"
