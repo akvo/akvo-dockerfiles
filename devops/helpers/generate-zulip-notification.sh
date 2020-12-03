@@ -24,7 +24,7 @@ curl -X POST https://akvo.zulipchat.com/api/v1/messages \
     -d "type=stream" \
     -d "to=${ZULIP_STREAM}" \
     -d "topic=Releases" \
-    -d "content=$MSG. [Full diff](https://github.com/akvo/${GITHUB_PROJECT}/compare/$OLDER_GIT_VERSION..$NEWEST_GIT_VERSION).
+    --data-urlencode "content=$MSG. [Full diff](https://github.com/akvo/${GITHUB_PROJECT}/compare/$OLDER_GIT_VERSION..$NEWEST_GIT_VERSION).
 
 \$slack_txt"
 
