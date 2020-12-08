@@ -2,23 +2,35 @@
 
 set -eu
 
-if [[ "${TRAVIS_PULL_REQUEST:=false}" != "false" ]]; then
-    COMMIT_RANGE="FETCH_HEAD..${TRAVIS_BRANCH}"
-    echo "travis PR #${TRAVIS_PULL_REQUEST} build, looking at files in ${COMMIT_RANGE}"
-    COMMIT_CONTENT=$(git diff --name-only "${COMMIT_RANGE}")
+CI_BRANCH="${SEMAPHORE_GIT_BRANCH:=unknown}"
+PR_NUMBER="${SEMAPHORE_GIT_PR_NUMBER:=0}"
+COMMIT_RANGE="${SEMAPHORE_GIT_COMMIT_RANGE:=}"
+
+if [[ "${PR_NUMBER}" == "0" ]]; then
+    CI_PULL_REQUEST="false"
 else
-    COMMIT_RANGE="${TRAVIS_COMMIT_RANGE/.../..}"
-    echo "travis push build, looking at files in ${COMMIT_RANGE}"
-    if [ "${COMMIT_RANGE}" == "" ]; then
-	echo "travis commit range empty, probably first push to a new branch"
-	COMMIT_CONTENT=$(git diff-tree --no-commit-id --name-only -r "${TRAVIS_COMMIT}")
-    else
-	COMMIT_CONTENT=$(git diff --name-only "${COMMIT_RANGE}") || {
-            echo "travis commit range diff failed, probably new PR or force push, falling back to single commit ${TRAVIS_COMMIT}"
-            COMMIT_CONTENT=$(git diff-tree --no-commit-id --name-only -r "${TRAVIS_COMMIT}")
-	}
-    fi
+    CI_PULL_REQUEST="true"
 fi
+
+# if [[ "${CI_PULL_REQUEST:=false}" != "false" ]]; then
+#     COMMIT_RANGE="FETCH_HEAD..${CI_BRANCH}"
+#     echo "travis PR #${} build, looking at files in ${COMMIT_RANGE}"
+#     COMMIT_CONTENT=$(git diff --name-only "${COMMIT_RANGE}")
+# else
+#     COMMIT_RANGE="${TRAVIS_COMMIT_RANGE/.../..}"
+#     echo "travis push build, looking at files in ${COMMIT_RANGE}"
+#     if [ "${COMMIT_RANGE}" == "" ]; then
+# 	echo "travis commit range empty, probably first push to a new branch"
+# 	COMMIT_CONTENT=$(git diff-tree --no-commit-id --name-only -r "${TRAVIS_COMMIT}")
+#     else
+# 	COMMIT_CONTENT=$(git diff --name-only "${COMMIT_RANGE}") || {
+#             echo "travis commit range diff failed, probably new PR or force push, falling back to single commit ${TRAVIS_COMMIT}"
+#             COMMIT_CONTENT=$(git diff-tree --no-commit-id --name-only -r "${TRAVIS_COMMIT}")
+# 	}
+#     fi
+# fi
+
+COMMIT_CONTENT=$(git diff --name-only "${COMMIT_RANGE}")
 
 echo "commits content: ${COMMIT_CONTENT}"
 
@@ -44,15 +56,14 @@ while read -r folder; do
 	docker build -t "${image_name}:${tag}" .
 
 	## deploy
-	if [[ "${TRAVIS_BRANCH}" != "master" ]]; then
+	if [[ "${CI_BRANCH}" != "master" ]]; then
 	    exit 0
 	fi
 
-	if [[ "${TRAVIS_PULL_REQUEST}" != "false" ]]; then
+	if [[ "${CI_PULL_REQUEST}" != "false" ]]; then
             exit 0
 	fi
 
-	docker login -u="${DOCKERHUB_USERNAME}" -p="${DOCKERHUB_PASSWORD}"
 	echo "Pushing ${image_name} ..."
 	docker push "${image_name}"
 	echo "Image name ${image_name}:${tag}"

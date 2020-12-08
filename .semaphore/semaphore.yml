@@ -1,13 +1,19 @@
 version: v1.0
-name: Initial Pipeline
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
+global_job_config:
+  secrets:
+    - name: docker-hub-credentials
+  prologue:
+    commands:
+      - echo "${DOCKER_PASSWORD}" | docker login --username "${DOCKER_USERNAME}" --password-stdinblocks:
 blocks:
-  - name: 'Block #1'
+  - name: 'Build and deploy'
     task:
       jobs:
-        - name: 'Job #1'
+        - name: 'Build and deploy'
           commands:
             - checkout
+            - ./ci/build.sh
