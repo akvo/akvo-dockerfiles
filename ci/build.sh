@@ -2,6 +2,7 @@
 
 set -eu
 
+CI_COMMIT="${SEMAPHORE_GIT_SHA:=local}"
 CI_BRANCH="${SEMAPHORE_GIT_BRANCH:=unknown}"
 PR_NUMBER="${SEMAPHORE_GIT_PR_NUMBER:=0}"
 COMMIT_RANGE="${SEMAPHORE_GIT_COMMIT_RANGE:=}"
@@ -40,7 +41,7 @@ DIRS=$(echo "${COMMIT_CONTENT}" | grep ".*/.*" | cut -f 1 -d/ | sort -u)
 echo "Dirs to be build: ${DIRS}"
 
 prefix=$(date +%Y%m%d.%H%M%S)
-tag="${TRAVIS_COMMIT:=local}"
+tag="${CI_COMMIT}"
 tag="${prefix}.${tag:0:7}"
 
 while read -r folder; do
