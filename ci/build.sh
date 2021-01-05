@@ -66,7 +66,7 @@ while read -r folder; do
 	fi
 
 	echo "Pushing ${image_name} ..."
-	docker push "${image_name}"
+	docker push "${image_name}:${tag}"
 	echo "Image name ${image_name}:${tag}"
     )
 done <<< "${DIRS}"
