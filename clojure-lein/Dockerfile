@@ -14,3 +14,5 @@ RUN set -eux; \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
+
+ENTRYPOINT ["run-as-user.sh"]
