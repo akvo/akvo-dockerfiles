@@ -1,4 +1,4 @@
-FROM google/cloud-sdk:290.0.0-alpine
+FROM google/cloud-sdk:322.0.0-alpine
 
 ENV LEIN_ROOT=1
 ENV CLOUDSDK_PYTHON_SITEPACKAGES=1
@@ -6,6 +6,7 @@ ENV CLOUDSDK_PYTHON_SITEPACKAGES=1
 RUN set -ex ; \
     apk add --no-cache \
     bash~=5 \
+    fontconfig~=2 \
     nodejs~=12 \
     npm~=12 \
     openjdk8~=8 \
@@ -14,7 +15,8 @@ RUN set -ex ; \
     maven~=3 \
     shadow~=4 \
     su-exec~=0.2 \
-    uchardet~=0.0.6 \
+    ttf-dejavu~=2 \
+    uchardet~=0.0 \
     zip~=3 && \
     gcloud components install app-engine-java && \
     rm -rf /google-cloud-sdk/.install/.backup && \
