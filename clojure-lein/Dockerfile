@@ -6,7 +6,9 @@ COPY --from=runasuser /usr/local/bin/run-as-user.sh /usr/local/bin/run-as-user.s
 RUN set -eux; \
     apt-get update && \
     apt-get -qq install -y --no-install-recommends --no-install-suggests \
-    runit=2.1.2-25 && \
+    fontconfig=2.13.1-2 \
+    runit=2.1.2-25 \
+    ttf-dejavu=2.37-1 && \
     useradd --create-home --home /home/akvo --shell /bin/bash --password akvo akvo && \
     cp -r /root/.lein /home/akvo/.lein && \
     chown akvo:akvo /home/akvo/.lein -R && \
