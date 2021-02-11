@@ -46,10 +46,10 @@ log "Changes to be deployed: https://github.com/akvo/${GITHUB_PROJECT}/compare/$
 log "Commits to be deployed:"
 git --no-pager log --oneline --no-merges "$PROD_LIVE_VERSION".."$NEW_LIVE_VERSION"
 
-generate-zulip-notification.sh "${PROD_LIVE_VERSION}" "${NEW_LIVE_VERSION}" "I am thinking about flipping **FLOW prod** to make this changes live. Should I?" "warning" "not_wrap_slack" "$GITHUB_PROJECT" "flumen-dev"
+generate-zulip-notification.sh "${PROD_LIVE_VERSION}" "${NEW_LIVE_VERSION}" "I am thinking about flipping **FLOW prod** to make this changes live. Should I?" "warning" "not_wrap_slack" "$GITHUB_PROJECT" "K2 Engine"
 ./notify.team.sh
 
-generate-zulip-notification.sh "${PROD_LIVE_VERSION}" "${NEW_LIVE_VERSION}" "Flipping *FLOW PROD!!!*" "warning" "wrap_slack" "$GITHUB_PROJECT" "flumen-dev"
+generate-zulip-notification.sh "${PROD_LIVE_VERSION}" "${NEW_LIVE_VERSION}" "Flipping *FLOW PROD!!!*" "warning" "wrap_slack" "$GITHUB_PROJECT" "K2 Engine"
 
 TAG_NAME="flip-$(TZ=UTC date +"%Y%m%d-%H%M%S")"
 
