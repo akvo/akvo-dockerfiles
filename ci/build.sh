@@ -51,7 +51,21 @@ while read -r folder; do
 	fi
 	cd "${folder}"
 	echo "Checking and building ${folder} ..."
-	docker run --rm -i hadolint/hadolint < Dockerfile
+        HADOLINT_CONFIG_FILE=./.hadolint.yml
+        if [ -f "$HADOLINT_CONFIG_FILE" ]; then
+            echo "Local Hadolint config"
+            docker run \
+                   --rm -i \
+                   -v ${PWD}/.hadolint.yml:/bin/hadolint.yml \
+                   -e XDG_CONFIG_HOME=/bin \
+                   hadolint/hadolint < Dockerfile
+        else
+            echo "No local Hadolint config"
+            docker run \
+                   --rm -i \
+                   hadolint/hadolint < Dockerfile
+        fi
+
 	find . -name '*.sh' -type f -print0 | xargs -0 -r -n1 shellcheck
 	image_name="akvo/akvo-${folder}"
 	docker build -t "${image_name}:${tag}" .
