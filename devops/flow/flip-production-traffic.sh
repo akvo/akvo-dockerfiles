@@ -14,7 +14,7 @@ function read_version () {
 
 GITHUB_PROJECT=akvo-flow
 
-PROD_CLUSTER="akvoflow-23" # WHH instance
+PROD_CLUSTER="akvoflow-194"
 
 read_version $PROD_CLUSTER
 PROD_LIVE_VERSION=$VERSION
