@@ -11,6 +11,6 @@ RUN apt-get update \
  && apt-get autoremove \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* \
- && pip3 install -r requirements.txt \
+ && pip install -r requirements.txt \
 
 CMD ["make", "html"]
