@@ -11,6 +11,6 @@ RUN apt-get update \
  && apt-get autoremove \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* \
- && pip install -r requirements.txt \
+ && pip3 install --no-cache-dir -r requirements.txt
 
 CMD ["make", "html"]
