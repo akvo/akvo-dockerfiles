@@ -1,5 +1,4 @@
 FROM python:slim
-LABEL maintainer="Sphinx Team <https://www.sphinx-doc.org/>"
 
 WORKDIR /docs
 RUN apt-get update \
