@@ -11,6 +11,7 @@ DEPLOYMENT_VERSION_LABEL=$2
 GITHUB_PROJECT=$3
 NOTIFICATION=$4
 ZULIP_STREAM=$5
+COMMIT_HASH=${6:-}  # Don't query the test environment, just try and deploy the given commit
 
 function read_version () {
     CLUSTER=$1
@@ -30,13 +31,18 @@ fi
 
 gcloud config set project akvo-lumen
 
-read_version "test"
-TEST_VERSION=$VERSION
 
 read_version "production"
 PROD_VERSION=$VERSION
 
-log "Deployed test version is $TEST_VERSION"
+if [[ -z "${COMMIT_HASH}" ]] ; then
+  read_version "test"
+  TEST_VERSION=$VERSION
+  log "Deployed test version is $TEST_VERSION"
+else
+  TEST_VERSION=$COMMIT_HASH
+  log "Version to deploy is $TEST_VERSION"
+fi
 log "Deployed prod version is $PROD_VERSION"
 log "See https://github.com/akvo/${GITHUB_PROJECT}/compare/$PROD_VERSION..$TEST_VERSION"
 
