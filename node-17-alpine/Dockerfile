@@ -6,9 +6,7 @@ COPY --from=runasuser /usr/local/bin/run-as-user.sh /usr/local/bin/run-as-user.s
 # Install python/pip
 ENV PYTHONUNBUFFERED=1
 RUN apk add --update --no-cache \
-    python3 && ln -sf python3 /usr/bin/python
-RUN python3 -m ensurepip
-RUN pip3 install --no-cache --upgrade pip setuptools
+    python3=3.6.9-r3 && ln -sf python3 /usr/bin/python
 
 RUN set -ex; \
     apk add --no-cache \
