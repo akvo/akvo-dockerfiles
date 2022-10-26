@@ -9,9 +9,9 @@ COPY --from=python /usr/local/lib/libpython3.8.so.1.0 /usr/local/lib/libpython3.
 COPY --from=python /usr/local/lib/libpython3.so /usr/local/lib/libpython3.so
 
 RUN set -ex; \
-    apk add --no-cache \
+    apk --update add --no-cache \
     bash~=5 \
-    gcc~=6 \
+    gcc~=10 \
     musl-dev~=1 \
     runit~=2 \
     shadow~=4 && \
