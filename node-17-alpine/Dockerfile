@@ -11,6 +11,8 @@ COPY --from=python /usr/local/lib/libpython3.so /usr/local/lib/libpython3.so
 RUN set -ex; \
     apk add --no-cache \
     bash~=5 \
+    gcc~=6 \
+    musl-dev~=1 \
     runit~=2 \
     shadow~=4 && \
     adduser -D -h /home/akvo -s /bin/bash akvo akvo
