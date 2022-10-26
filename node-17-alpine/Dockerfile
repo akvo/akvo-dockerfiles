@@ -1,7 +1,7 @@
 FROM akvo/akvo-run-as-user:20200813.123605.7ae822d as runasuser
-FROM node:17.3.0-alpine3.15
 FROM python:3.8.13-alpine3.16 as python
 
+FROM node:17.3.0-alpine3.15
 COPY --from=runasuser /usr/local/bin/run-as-user.sh /usr/local/bin/run-as-user.sh
 COPY --from=python /usr/local/bin/python3 /usr/local/bin/python3
 COPY --from=python /usr/local/lib/python3.8 /usr/local/lib/python3.8
