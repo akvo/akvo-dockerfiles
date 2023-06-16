@@ -1,10 +1,10 @@
-FROM kiwigrid/gcloud-kubectl-helm:2.12.3-234.0.0-88
+FROM kiwigrid/gcloud-kubectl-helm:3.11.1-421.0.0-1
 
 # hadolint ignore=DL3002
 USER root
 
 RUN set -x \
-    && apk add -u --no-cache curl~=7 jq~=1 bash~=4 shadow~=4.5 runit~=2.1 \
+    && apk add -u --no-cache curl~=7 jq~=1 bash~=5 shadow~=4 runit~=2.1 \
     && curl -o /usr/bin/slack-cli https://raw.githubusercontent.com/rockymadden/slack-cli/v0.18.0/src/slack \
     && chmod +x /usr/bin/slack-cli \
     && slack-cli -v
