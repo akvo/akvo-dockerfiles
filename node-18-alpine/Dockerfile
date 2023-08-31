@@ -12,6 +12,7 @@ RUN set -ex; \
     apk --update add --no-cache \
     bash~=5 \
     gcc~=12 \
+    make~=4 \
     musl-dev~=1 \
     runit~=2 \
     shadow~=4 && \
