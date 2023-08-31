@@ -11,6 +11,7 @@ COPY --from=python /usr/local/lib/libpython3.so /usr/local/lib/libpython3.so
 RUN set -ex; \
     apk --update add --no-cache \
     bash~=5 \
+    g++~=12 \
     gcc~=12 \
     make~=4 \
     musl-dev~=1 \
