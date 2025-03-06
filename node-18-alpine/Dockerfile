@@ -19,4 +19,5 @@ RUN set -ex; \
     shadow~=4 && \
     adduser -D -h /home/akvo -s /bin/bash akvo akvo
 
+
 ENTRYPOINT ["run-as-user.sh"]
