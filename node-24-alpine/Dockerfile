@@ -1,5 +1,5 @@
 FROM akvo/akvo-run-as-user:20200813.123605.7ae822d AS runasuser
-FROM python:3.8.18-alpine3.18 AS python
+FROM python:3.13-alpine3.22 AS python
 
 # Upgrade Node.js to 20 (Alpine 3.20)
 FROM node:24.8.0-alpine3.22
