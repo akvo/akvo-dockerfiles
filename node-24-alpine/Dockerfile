@@ -9,8 +9,8 @@ COPY --from=runasuser /usr/local/bin/run-as-user.sh /usr/local/bin/run-as-user.s
 
 # Bring in Python runtime
 COPY --from=python /usr/local/bin/python3 /usr/local/bin/python
-COPY --from=python /usr/local/lib/python3.8 /usr/local/lib/python3.8
-COPY --from=python /usr/local/lib/libpython3.8.so.1.0 /usr/local/lib/libpython3.8.so.1.0
+COPY --from=python /usr/local/lib/python3.13 /usr/local/lib/python3.13
+COPY --from=python /usr/local/lib/libpython3.13.so.1.0 /usr/local/lib/libpython3.13.so.1.0
 COPY --from=python /usr/local/lib/libpython3.so /usr/local/lib/libpython3.so
 
 # Install required packages
