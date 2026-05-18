@@ -1,7 +1,7 @@
-FROM golang:1.23-alpine AS builder
+FROM golang:1.25-alpine AS builder
 
-#Since no latest version tagged, get from this version https://github.com/kubernetes-sigs/kubectl-validate/commit/d2f2d68fba097640069aaff046fa7cfddfd63326
-RUN go install sigs.k8s.io/kubectl-validate@d2f2d68fba097640069aaff046fa7cfddfd63326
+#Latest release is v0.0.4 (2024-05-29) - older than upstream master; pinning to current master HEAD instead for Kubernetes 1.35 schema support. Ref: https://github.com/kubernetes-sigs/kubectl-validate/commit/a97ccfaca20b164819afdae780392496f6ed6bbd
+RUN go install sigs.k8s.io/kubectl-validate@a97ccfaca20b164819afdae780392496f6ed6bbd
 
 FROM scratch
 
