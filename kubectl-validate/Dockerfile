@@ -5,6 +5,10 @@ RUN go install sigs.k8s.io/kubectl-validate@a97ccfaca20b164819afdae780392496f6ed
 
 FROM scratch
 
+LABEL org.opencontainers.image.source="https://github.com/akvo/akvo-dockerfiles"
+LABEL org.opencontainers.image.title="kubectl-validate"
+LABEL org.opencontainers.image.description="Akvo CI image wrapping sigs.k8s.io/kubectl-validate."
+
 COPY --from=builder /go/bin/kubectl-validate /kubectl-validate
 
 ENTRYPOINT ["/kubectl-validate"]
