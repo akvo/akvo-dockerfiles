@@ -2,34 +2,16 @@
 
 set -eu
 
-CI_COMMIT="${SEMAPHORE_GIT_SHA:=local}"
-CI_BRANCH="${SEMAPHORE_GIT_BRANCH:=unknown}"
-PR_NUMBER="${SEMAPHORE_GIT_PR_NUMBER:=0}"
-COMMIT_RANGE="${SEMAPHORE_GIT_COMMIT_RANGE:=}"
+CI_COMMIT="${GITHUB_SHA:=local}"
+CI_BRANCH="${CI_BRANCH:=unknown}"
+PR_NUMBER="${PR_NUMBER:=0}"
+COMMIT_RANGE="${COMMIT_RANGE:=}"
 
 if [[ "${PR_NUMBER}" == "0" ]]; then
     CI_PULL_REQUEST="false"
 else
     CI_PULL_REQUEST="true"
 fi
-
-# if [[ "${CI_PULL_REQUEST:=false}" != "false" ]]; then
-#     COMMIT_RANGE="FETCH_HEAD..${CI_BRANCH}"
-#     echo "travis PR #${} build, looking at files in ${COMMIT_RANGE}"
-#     COMMIT_CONTENT=$(git diff --name-only "${COMMIT_RANGE}")
-# else
-#     COMMIT_RANGE="${TRAVIS_COMMIT_RANGE/.../..}"
-#     echo "travis push build, looking at files in ${COMMIT_RANGE}"
-#     if [ "${COMMIT_RANGE}" == "" ]; then
-# 	echo "travis commit range empty, probably first push to a new branch"
-# 	COMMIT_CONTENT=$(git diff-tree --no-commit-id --name-only -r "${TRAVIS_COMMIT}")
-#     else
-# 	COMMIT_CONTENT=$(git diff --name-only "${COMMIT_RANGE}") || {
-#             echo "travis commit range diff failed, probably new PR or force push, falling back to single commit ${TRAVIS_COMMIT}"
-#             COMMIT_CONTENT=$(git diff-tree --no-commit-id --name-only -r "${TRAVIS_COMMIT}")
-# 	}
-#     fi
-# fi
 
 COMMIT_CONTENT=$(git diff --name-only "${COMMIT_RANGE}")
 
